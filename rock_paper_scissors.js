@@ -1,4 +1,14 @@
+function getPlayerChoice() {
+  
+  let lowercase = prompt('Choose Rock, Paper or Scissors').toLowerCase();
+
+  let firstLetterCap =  lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
+
+  return firstLetterCap; 
+}
+
 function getComputerChoice() {
+
   let randomNumber = Math.floor(Math.random() * 3) + 1;
 
   switch (randomNumber) {
@@ -17,17 +27,17 @@ function playRound(playerSelection, computerSelection) {
     || playerSelection == 'Paper' && computerSelection == 'Rock'
     || playerSelection == 'Scissors' && computerSelection == 'Paper') {   
 
-    return `You Win! ${playerSelection} beats ${computerSelection}`;
+    return "W";
 
   } else if (playerSelection == 'Rock' && computerSelection == 'Paper'
     || playerSelection == 'Paper' && computerSelection == 'Scissors'
     || playerSelection == 'Scissors' && computerSelection == 'Rock') {
 
-    return `You Lose! ${computerSelection} beats ${playerSelection}`;    
+    return "L";    
    
   } else if (playerSelection == computerSelection) {
     
-    return `It's a tie! You both chose ${playerSelection}`;
+    return "T";
 
   } else {
     return "Invalid choice. Please choose Rock, Paper or Scissors";
@@ -37,33 +47,34 @@ function playRound(playerSelection, computerSelection) {
 function game() {
 
   let playerScore = 0;
-  let computerScore = 0;
+  let computerScore = 0; 
+  i = 0;
 
-  for (let i=0; i < 5; i++) {
-    playerSelection = prompt('Choose Rock, Paper or Scissors').toLowerCase();
-    playerSelection = playerSelection.replace(playerSelection.charAt(0), playerSelection.charAt(0).toUpperCase());
+  while (playerScore < 5 && computerScore < 5) {
 
-    computerSelection = getComputerChoice();
+    let playerSelection = getPlayerChoice();
 
-    console.log(`Round: ${ i + 1 }`);
+    let computerSelection = getComputerChoice();
+      
+    console.log(`Round: ${ ++i }`);
     
-    if (playRound(playerSelection, computerSelection) == `You Win! ${playerSelection} beats ${computerSelection}`) {
+    if (playRound(playerSelection, computerSelection) == "W") {
 
       console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
       playerScore = playerScore + 1;
 
-    } else if (playRound(playerSelection, computerSelection) == `You Lose! ${computerSelection} beats ${playerSelection}`) {
+    } else if (playRound(playerSelection, computerSelection) == "L") {
       
       console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
       computerScore = computerScore + 1;
 
-    } else if (playRound(playerSelection, computerSelection) == `It's a tie! You both chose ${playerSelection}`) {
+    } else if (playRound(playerSelection, computerSelection) == "T") {
  
       console.log(`It's a tie! You both chose ${playerSelection}`);
 
     } else {
       console.log("Invalid choice. Please choose Rock, Paper or Scissors");
-      i = i - 1 ;
+      i = i - 1;
     } 
 
    console.log(`Your score is: ${playerScore}`);
@@ -71,11 +82,13 @@ function game() {
   }
 
   if (playerScore > computerScore) {
+
     console.log("Congratulations! You won the game!");
-  } else if (playerScore < computerScore) {
-    console.log("You lost the game!");
+
   } else {
-    console.log("It's a tie!");
+
+    console.log("You lost the game!");
+
   }
 }
 
