@@ -1,0 +1,91 @@
+html, body {
+  height: 100%;
+  margin: 0;
+ }
+
+body {
+  text-align: center;
+  background-color: #1F2937;
+  color: #ddd;
+  font-family: 'Roboto', sans-serif;
+} 
+.header {
+  background-color: #111720;
+  padding: 40px 0px;
+}
+
+.title {
+  color: #fac650;
+  font-size: 40px;
+}
+
+.score-info {
+  font-size: 32px;
+}
+
+.score-message, 
+.endgame-message,
+#restart-btn {
+  font-size: 20px;
+}
+
+.header,
+.text-container,
+.buttons {
+  margin-bottom: 100px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+}
+
+.button {
+  height: 160px;
+  width: 160px;
+  border-radius: 20px;
+ }
+
+.rock, 
+.paper, 
+.scissors {
+  padding: 0;
+  border: 0;
+}
+
+.rock {
+background-color: rgb(161, 19, 19);
+}
+.paper {
+background-color: white;
+}
+.scissors {
+background-color: black;
+}
+
+img {
+  height: 130px;
+  width: 150px;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 75px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#restart-btn {
+  color: #ddd;
+  background-color: #393e46;
+  font-weight: 700;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 32px;
+}
+
+.disappear{
+  display: none;
+}
