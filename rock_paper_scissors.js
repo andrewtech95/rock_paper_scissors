@@ -21,59 +21,67 @@ function getComputerPlay() {
   
   switch (randomNumber) {
     case 1:
-    return 'Rock';
+    return 'rock';
     case 2:   
-    return 'Paper';
+    return 'paper';
     case 3:
-    return 'Scissors';
+    return 'scissors';
   }
 }
     
 function playRound(e) {
-  playerSelection = e.target.alt;
+  playerSelection = e.target.classList[0];
   computerSelection = getComputerPlay();
   
-  if (playerSelection === 'Rock' && computerSelection === 'Scissors' 
-  || playerSelection === 'Paper' && computerSelection === 'Rock'
-  || playerSelection === 'Scissors' && computerSelection === 'Paper') {   
+  if (playerSelection === 'rock' && computerSelection === 'scissors' 
+  || playerSelection === 'paper' && computerSelection === 'rock'
+  || playerSelection === 'scissors' && computerSelection === 'paper') {   
     
     keepScore("W");
     
-  } else if (playerSelection === 'Rock' && computerSelection === 'Paper'
-  || playerSelection === 'Paper' && computerSelection === 'Scissors'
-  || playerSelection === 'Scissors' && computerSelection === 'Rock') {
+  } else if (playerSelection === 'rock' && computerSelection === 'paper'
+  || playerSelection === 'paper' && computerSelection === 'scissors'
+  || playerSelection === 'scissors' && computerSelection === 'rock') {
     
     keepScore("L");    
     
   } else keepScore("T");
-  
-  if (playerScore === 5 || computerScore === 5) {
-    declareWinner(playerScore, computerScore);
-    restartBtn.classList.remove('disappear');
-    buttons.forEach(button => button.removeEventListener('click', playRound));
-  }
+
+  isGameOver();
 }  
 
 function keepScore(roundResult) {
   if (roundResult === "W") {
     scoreInfo.textContent = "You win!";
-    scoreMessage.textContent = `${playerSelection} beats ${computerSelection}`;
+    scoreMessage.textContent = `${capitalizeFirstLetter(playerSelection)} beats ${computerSelection}`;
     playerScore++;
-
+    
   } else if (roundResult === "L") {
     scoreInfo.textContent = "You lose!";
-    scoreMessage.textContent = `${computerSelection} beats ${playerSelection}`;
+    scoreMessage.textContent = `${capitalizeFirstLetter(computerSelection)} beats ${playerSelection}`;
     computerScore++;
-
+    
   } else {
     scoreInfo.textContent = "It's a tie!";
     scoreMessage.textContent = `You both chose ${playerSelection}`; 
   }
-
+  
   playerScorePara.textContent = `Player: ${playerScore}`;
   computerScorePara.textContent = `Computer: ${computerScore}`;
 }
-  
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function isGameOver() { 
+  if (playerScore === 5 || computerScore === 5) {
+  declareWinner(playerScore, computerScore);
+  restartBtn.classList.remove('disappear');
+  buttons.forEach(button => button.removeEventListener('click', playRound));
+  }
+}
+
 function declareWinner(playerScore, computerScore) {
   if (playerScore > computerScore) endgameMsg.textContent = "Congratulations! You won the game!";  
   else endgameMsg.textContent = "You lost the game!";
